@@ -51,7 +51,7 @@ jobs:
           path: dist
 
   deploy:
-    needs: build
+    needs: cache-and-install
     permissions:
       pages: write
       id-token: write
