@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useOptions } from '@/composables/useOptions';
 import { KeyboardKeyUnits } from '@/enums/KeyboardKeyUnits';
 import type { KeyboardKey } from '@/types/KeyboardKey';
 import { useEventListener } from '@vueuse/core';
@@ -13,6 +14,7 @@ const props = withDefaults(defineProps<{
     shift: false
 })
 
+
 const emit = defineEmits<{
     animationFinished: [key: KeyboardKey]
 }>()
@@ -26,15 +28,18 @@ const keyStyles = computed(() => ({
     "h-16 w-36": props.keyboardKey.unit === KeyboardKeyUnits.TwoAndQuarterUnits,
     "h-16 w-44": props.keyboardKey.unit === KeyboardKeyUnits.TwoAndThreeQuarterUnits,
     "h-16 grow min-w-96": props.keyboardKey.unit === KeyboardKeyUnits.SixAndQuarterUnits,
-    "outlineAnimation": props.lightUp
+    "outlineAnimation": props.lightUp && !stickyKeys.value,
+    "border-slate-500": stickyKeys.value && props.lightUp
 }))
 
 const keyReference = ref<HTMLElement | null>(null)
+const { stickyKeys } = useOptions()
 
 useEventListener(keyReference, 'animationend', () => {
     keyReference.value?.classList.remove('outlineAnimation')
     emit('animationFinished', props.keyboardKey)
 })
+
 </script>
 
 <template>

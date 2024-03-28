@@ -5,4 +5,5 @@ export type KeyboardKey = {
   secondarySymbol?: string
   unit: KeyboardKeyUnits
   name?: string
+  tone?: number
 }

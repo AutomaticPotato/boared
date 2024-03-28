@@ -6,17 +6,20 @@ export const defaultLayout: KeyboardKey[] = [
     primarySymbol: '`',
     secondarySymbol: '~',
     unit: KeyboardKeyUnits.OneUnit,
-    name: 'dead'
+    name: 'dead',
+    tone: 0
   },
   {
     primarySymbol: '1',
     secondarySymbol: '!',
-    unit: KeyboardKeyUnits.OneUnit
+    unit: KeyboardKeyUnits.OneUnit,
+    tone: 1
   },
   {
     primarySymbol: '2',
     secondarySymbol: '@',
-    unit: KeyboardKeyUnits.OneUnit
+    unit: KeyboardKeyUnits.OneUnit,
+    tone: 2
   },
   {
     primarySymbol: '3',

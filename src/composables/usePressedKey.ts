@@ -1,5 +1,4 @@
 import type { KeyboardKey } from '@/types/KeyboardKey'
-import { useEventListener } from '@vueuse/core'
 import { ref } from 'vue'
 
 const pressedKeys = ref(new Set<string>())
@@ -19,8 +18,5 @@ export function usePressedKeys() {
     if (key.name) pressedKeys.value.delete(key.name.toLocaleLowerCase())
   }
 
-  useEventListener(window, 'keydown', (e: KeyboardEvent) => {
-    pressedKeys.value.add(e.key.toLocaleLowerCase())
-  })
   return { pressedKeys, shouldLightUp, clearKeyFromSet }
 }
