@@ -11,7 +11,7 @@ import OptionsBar from './components/OptionsBar.vue';
 const keys = defaultLayout
 const { pressedKeys } = usePressedKeys()
 const { playNote } = useTone()
-const { playSound } = useOptions()
+const { playSound, flyingKeys } = useOptions()
 
 useEventListener(window, 'keydown', (e: KeyboardEvent) => {
   pressedKeys.value.add(e.key.toLocaleLowerCase())
@@ -24,6 +24,6 @@ useEventListener(window, 'keydown', (e: KeyboardEvent) => {
   <div class="flex flex-col items-center p-5">
     <OptionsBar />
     <KeyboardCase :keyboard-layout="keys" />
-    <KeySpawner :keyboard-layout="keys" />
+    <KeySpawner v-if="flyingKeys" :keyboard-layout="keys" />
   </div>
 </template>

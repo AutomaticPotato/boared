@@ -6,8 +6,8 @@ import { computed, ref } from 'vue';
 const checked = defineModel()
 
 const switchButtonLocation = computed(() => ({
-    "left-0 animate-move origin-right bg-slate-300": !checked.value,
-    "left-1/2 animate-move origin-left bg-emerald-500": checked.value
+    "move-left origin-right bg-slate-300": !checked.value,
+    "move-right origin-left bg-emerald-500": checked.value
 }))
 
 const switchRef = ref<HTMLElement | null>(null)
@@ -30,24 +30,44 @@ useEventListener(switchRef, 'animationend', () => {
 </template>
 
 <style scoped>
-.animate-move {
-    animation: grow-shrink-horizontal 300ms linear;
+.move-right {
+    animation: move-right 300ms ease-out forwards;
 }
 
-@keyframes grow-shrink-horizontal {
+.move-left {
+    animation: move-left 300ms ease-out forwards;
+}
+
+@keyframes move-right {
     0% {
-        /* transform: scale(1, 1); */
+        left: 0;
         height: 1.25rem;
         width: 1.25rem;
     }
 
     50% {
-        /* transform: scale(1.5, 1); */
-        width: 2.5rem;
+        width: 100%;
+        left: 0;
     }
 
     100% {
-        /* transform: scale(1, 1); */
+        left: 50%;
+    }
+}
+
+@keyframes move-left {
+    0% {
+        left: 50%;
+    }
+
+    50% {
+        width: 100%;
+        left: 0;
+    }
+
+    100% {
+        left: 0;
+        height: 1.25rem;
         width: 1.25rem;
     }
 }
