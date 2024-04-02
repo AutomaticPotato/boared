@@ -7,6 +7,7 @@ import { usePressedKeys } from '@/composables/usePressedKey';
 import { useTone } from './composables/useTone';
 import { useOptions } from './composables/useOptions';
 import OptionsBar from './components/OptionsBar.vue';
+import SideBar from './components/SideBar.vue';
 
 const keys = defaultLayout
 const { pressedKeys } = usePressedKeys()
@@ -23,6 +24,7 @@ useEventListener(window, 'keydown', (e: KeyboardEvent) => {
 <template>
   <div class="flex flex-col items-center p-5">
     <OptionsBar />
+    <SideBar />
     <KeyboardCase :keyboard-layout="keys" />
     <KeySpawner v-if="flyingKeys" :keyboard-layout="keys" />
   </div>
