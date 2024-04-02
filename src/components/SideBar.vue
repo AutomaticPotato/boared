@@ -4,6 +4,8 @@ import { useSideBar } from '@/composables/useSideBar';
 import SwitchButton from '@/components/SwitchButton.vue';
 import { computed } from 'vue';
 import CloseIcon from '@/components/icons/CloseIcon.vue';
+import ResetIcon from '@/components/icons/ResetIcon.vue';
+
 
 const { sideBarOpen } = useSideBar();
 const { playSound, stickyKeys, flyingKeys } = useOptions()
