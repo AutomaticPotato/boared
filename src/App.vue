@@ -8,17 +8,21 @@ import { useTone } from './composables/useTone';
 import { useOptions } from './composables/useOptions';
 import OptionsBar from './components/OptionsBar.vue';
 import SideBar from './components/SideBar.vue';
+import KeyHistory from './components/KeyHistory.vue';
 
 const keys = defaultLayout
-const { pressedKeys } = usePressedKeys()
+const { pressedKeys, keyHistory } = usePressedKeys()
 const { playNote } = useTone()
-const { playSound, flyingKeys } = useOptions()
+const { playSound, flyingKeys, showHistory } = useOptions()
 
 useEventListener(window, 'keydown', (e: KeyboardEvent) => {
-  pressedKeys.value.add(e.key.toLocaleLowerCase())
+  const lowerCaseKey = e.key.toLocaleLowerCase()
+  keyHistory.value.push(e.key)
+  pressedKeys.value.add(lowerCaseKey)
   const keyIndex = defaultLayout.findIndex(key => key.primarySymbol === e.key.toLocaleLowerCase())
   if (playSound.value) playNote((50 + Math.abs(keyIndex)) * 5)
 })
+
 </script>
 
 <template>
@@ -26,6 +30,7 @@ useEventListener(window, 'keydown', (e: KeyboardEvent) => {
     <OptionsBar />
     <SideBar />
     <KeyboardCase :keyboard-layout="keys" />
+    <KeyHistory class="mt-5" v-if="showHistory" />
     <KeySpawner v-if="flyingKeys" :keyboard-layout="keys" />
   </div>
 </template>

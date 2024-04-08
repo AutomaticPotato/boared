@@ -2,6 +2,7 @@ import type { KeyboardKey } from '@/types/KeyboardKey'
 import { ref } from 'vue'
 
 const pressedKeys = ref(new Set<string>())
+const keyHistory = ref<string[]>([])
 
 export function usePressedKeys() {
   function shouldLightUp(key: KeyboardKey) {
@@ -18,5 +19,5 @@ export function usePressedKeys() {
     if (key.name) pressedKeys.value.delete(key.name.toLocaleLowerCase())
   }
 
-  return { pressedKeys, shouldLightUp, clearKeyFromSet }
+  return { pressedKeys, shouldLightUp, clearKeyFromSet, keyHistory}
 }
